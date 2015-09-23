@@ -139,7 +139,9 @@ public class Rabbit extends Animal {
             
             if (whatsThere == Bush.class){
                 Position pos = getCoordinate(d);
-                //editGrid(pos.getRow(), pos.getColumn(), 2);
+                System.out.println(pos.getRow());
+                System.out.println(pos.getColumn());
+                editGrid(pos.getRow(), pos.getColumn(), 2);
             }
             /*
             else if (whatsThere == Carrot.class){
@@ -191,28 +193,50 @@ public class Rabbit extends Animal {
         int row = getPosition().getRow();
         int column = getPosition().getColumn();
         int dist = distance(direc);
+        System.out.println("in get coordinate");
+        System.out.println("My coordinates");
+        System.out.println(row);
+        System.out.println(column);
+        System.out.println(direc);
+
 
         switch(direc){
             case N:
+                System.out.println("in N");
                 column -= dist;
+                break;
             case NE:
+                System.out.println("in NE");
                 column -= dist;
                 row += dist;
+                break;
             case E:
+                System.out.println("in E");
                 row += dist;
+                break;
             case SE:
+                System.out.println("in SE");
                 column += dist;
                 row += dist;
+                break;
             case S:
+                System.out.println("in S");
                 column += dist;
+                break;
             case SW:
+                System.out.println("in SW");
                 column += dist;
                 row -= dist;
+                break;
             case W:
+                System.out.println("in W");
                 row -= dist;
+                break;
             case NW:
+                System.out.println("in NW");
                 column -= dist;
                 row -= dist;
+                break;
         }
 
         return new Position(column, row);
