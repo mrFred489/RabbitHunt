@@ -213,7 +213,9 @@ public class Rabbit extends Animal {
         Position returnValue = new Position(column, row);
     }
 
-    public void printGrid()
+    public void printGrid(){
+        
+    }
     
     /**
      * This method is used to retrieve who the authors are.
