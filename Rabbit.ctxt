@@ -1,0 +1,35 @@
+#BlueJ class context
+comment0.params=model\ position
+comment0.target=Rabbit(Model,\ Position)
+comment1.params=
+comment1.target=Direction\ decideDirection2()
+comment1.text=\n\ Decides\ in\ which\ direction\ the\ rabbit\ wants\ to\ move.\n
+comment10.params=direc
+comment10.target=Position\ getCoordinate(Direction)
+comment11.params=
+comment11.target=void\ printGrid()
+comment12.params=
+comment12.target=java.lang.String\ getCreator()
+comment12.text=\n\ This\ method\ is\ used\ to\ retrieve\ who\ the\ authors\ are.\n
+comment2.params=
+comment2.target=Direction\ decideDirectio3()
+comment3.params=
+comment3.target=Direction\ decideDirection()
+comment3.text=\n\ Opgave\ 3\n\ Find\ en\ busk,\ og\ g\u00E5\ rundt\ om\ den,\ s\u00E5\ r\u00E6ven\ ikke\ kan\ se\ kaninen.\n\ @return\n
+comment4.params=direct
+comment4.target=Direction\ tryEscape(Direction)
+comment4.text=\n\ Used\ in\ task\ 1,\n\ @param\ direct\n\ @return\n
+comment5.params=
+comment5.target=void\ lookAround()
+comment5.text=\n\ Looks\ around\ the\ area\ and\ add\ what\ it\ sees\ to\ some\ ArrayLists\n
+comment6.params=
+comment6.target=void\ lookAroundGrid()
+comment6.text=\n\ 1\ \=\ kanin\n\ 2\ \=\ busk\n\ 3\ \=\ gulerod\n\ 7\ \=\ r\u00E6v\ ukendt\n\ 8\ \=\ r\u00E6v\ nord\n\ 9\ \=\ r\u00E6v\ nord\ \u00F8st\n\ 10\ \=\ r\u00E6v\ \u00F8st\n\ 11\ \=\ r\u00E6v\ syd\ \u00F8st\n\ 12\ \=\ r\u00E6v\ syd\n\ 13\ \=\ r\u00E6v\ syd\ vest\n\ 14\ \=\ r\u00E6v\ vest\n\ 15\ \=\ r\u00E6v\ nord\ vest\n
+comment7.params=row\ column\ number
+comment7.target=void\ editGrid(int,\ int,\ int)
+comment8.params=
+comment8.target=void\ clearAreaKnowledge()
+comment8.text=\n\ clear\ the\ ArrayLists,\ which\ is\ storing\ the\ knowledge\ of\ the\ surrundings\ in\ the\ turn.\n
+comment9.params=
+comment9.target=void\ populateGrid()
+numComments=13

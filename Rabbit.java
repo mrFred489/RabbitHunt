@@ -135,7 +135,7 @@ public class Rabbit extends Animal {
             Class<?> whatsThere = look(d);
             int dist = distance(d);
 
-            else if (whatsThere == Bush.class){
+            if (whatsThere == Bush.class){
                 Position pos = getCoordinate(d);
                 editGrid(pos.getRow(), pos.getColumn(), 2);
             }
@@ -154,12 +154,13 @@ public class Rabbit extends Animal {
     }
 
     private void editGrid(int row, int column, int number){
-        grid.get(row).set(column, number)
+        System.out.println("");
+        grid.get(row).set(column, number);
     }
 
-    private ArrayList<ArrayList<Integer>> nextTurn(int turns){
-
-    }
+    /*private ArrayList<ArrayList<Integer>> nextTurn(int turns){
+        
+    }*/
 
     /**
      * clear the ArrayLists, which is storing the knowledge of the surrundings in the turn.
@@ -210,7 +211,8 @@ public class Rabbit extends Animal {
                 column -= dist;
                 row -= dist;
         }
-        Position returnValue = new Position(column, row);
+        return new Position(column, row);
+        
     }
 
     public void printGrid(){
