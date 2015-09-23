@@ -20,12 +20,13 @@ public class Rabbit extends Animal {
     private ArrayList<Direction> wallDirections = new ArrayList<Direction>();
     private ArrayList<Integer> wallDistance = new ArrayList<Integer>();
 
-    private ArrayList<ArrayList<Integer>> grid = new ArrayList<ArrayList<Integer>>();
+    private ArrayList<ArrayList<Integer>> myGrid = new ArrayList<ArrayList<Integer>>();
 
     private int circleSize = 1;
     private int circleCount = circleSize;
     public Rabbit(Model model, Position position) {
         super(model, position);
+        populateGrid();
     }
     
     /**
@@ -130,16 +131,17 @@ public class Rabbit extends Animal {
     private void lookAroundGrid(){
         int myRow = getPosition().getRow();
         int myColumn = getPosition().getColumn();
+        
         Iterable<Direction> directions = Direction.allDirections();
         for (Direction d : directions) {
             Class<?> whatsThere = look(d);
             int dist = distance(d);
-
+            
             if (whatsThere == Bush.class){
                 Position pos = getCoordinate(d);
-                editGrid(pos.getRow(), pos.getColumn(), 2);
+                //editGrid(pos.getRow(), pos.getColumn(), 2);
             }
-
+            /*
             else if (whatsThere == Carrot.class){
                 Position pos = getCoordinate(d);
                 editGrid(pos.getRow(), pos.getColumn(), 3);
@@ -149,13 +151,14 @@ public class Rabbit extends Animal {
                 Position pos = getCoordinate(d);
                 editGrid(pos.getRow(), pos.getColumn(), 7);
             }
+            */
 
         }
+        
     }
 
     private void editGrid(int row, int column, int number){
-        System.out.println("");
-        grid.get(row).set(column, number);
+        myGrid.get(row).set(column, number);
     }
 
     /*private ArrayList<ArrayList<Integer>> nextTurn(int turns){
@@ -180,7 +183,7 @@ public class Rabbit extends Animal {
             for (int n = 0; n < 20; n++){
                 row.add(0);
             }
-            grid.add(row);
+            myGrid.add(row);
         }
     }
 
@@ -211,14 +214,16 @@ public class Rabbit extends Animal {
                 column -= dist;
                 row -= dist;
         }
+
         return new Position(column, row);
         
     }
 
     public void printGrid(){
-        for (ArrayList<Integer> row: grid){
+        for (ArrayList<Integer> row: myGrid){
             System.out.println(row);
         }
+        System.out.println();
     }
     
     /**
