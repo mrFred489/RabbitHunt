@@ -3,9 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="8c6a78b3-6acf-46e8-ad10-0d43bf7a10e1" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Rabbit.class" afterPath="$PROJECT_DIR$/Rabbit.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Rabbit.ctxt" afterPath="$PROJECT_DIR$/Rabbit.ctxt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Rabbit.java" afterPath="$PROJECT_DIR$/Rabbit.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/package.bluej" afterPath="$PROJECT_DIR$/package.bluej" />
     </list>
     <ignored path="RabbitHunt.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -216,12 +214,12 @@
       <created>1443007851111</created>
       <option name="number" value="Default" />
       <updated>1443007851111</updated>
-      <workItem from="1443007853139" duration="780000" />
+      <workItem from="1443007853139" duration="1069000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="780000" />
+    <option name="totallyTimeSpent" value="1069000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="0" />
