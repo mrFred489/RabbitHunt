@@ -20,7 +20,7 @@ public class Rabbit extends Animal {
     private ArrayList<Direction> wallDirections = new ArrayList<Direction>();
     private ArrayList<Integer> wallDistance = new ArrayList<Integer>();
 
-    private ArrayList<ArrayList<Integer>> myGrid = new ArrayList<ArrayList<Integer>>();
+    private ArrayList<ArrayList<Integer>> grid = new ArrayList<ArrayList<Integer>>();
 
     private int circleSize = 1;
     private int circleCount = circleSize;
@@ -171,7 +171,7 @@ public class Rabbit extends Animal {
     }
 
     private void editGrid(int row, int column, int number){
-        myGrid.get(row).set(column, number);
+        grid.get(row).set(column, number);
     }
 
     /*private ArrayList<ArrayList<Integer>> nextTurn(int turns){
@@ -196,7 +196,7 @@ public class Rabbit extends Animal {
             for (int n = 0; n < 20; n++){
                 row.add(0);
             }
-            myGrid.add(row);
+            grid.add(row);
         }
     }
 
@@ -243,7 +243,7 @@ public class Rabbit extends Animal {
     }
 
     public void printGrid(){
-        for (ArrayList<Integer> row: myGrid){
+        for (ArrayList<Integer> row: grid){
             System.out.println(row);
         }
         System.out.println();
