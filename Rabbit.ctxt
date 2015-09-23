@@ -1,0 +1,24 @@
+#BlueJ class context
+comment0.params=model\ position
+comment0.target=Rabbit(Model,\ Position)
+comment1.params=
+comment1.target=Direction\ decideDirection2()
+comment1.text=\n\ Decides\ in\ which\ direction\ the\ rabbit\ wants\ to\ move.\n
+comment2.params=
+comment2.target=Direction\ decideDirection()
+comment3.params=
+comment3.target=Direction\ decideDirection3()
+comment3.text=\n\ Opgave\ 3\n\ Find\ en\ busk,\ og\ g\u00E5\ rundt\ om\ den,\ s\u00E5\ r\u00E6ven\ ikke\ kan\ se\ kaninen.\n\ @return\n
+comment4.params=direct
+comment4.target=Direction\ tryEscape(Direction)
+comment4.text=\n\ Used\ in\ task\ 1,\n\ @param\ direct\n\ @return\n
+comment5.params=
+comment5.target=void\ lookAround()
+comment5.text=\n\ Looks\ around\ the\ area\ and\ add\ what\ it\ sees\ to\ some\ ArrayLists\n
+comment6.params=
+comment6.target=void\ clearAreaKnowledge()
+comment6.text=\n\ clear\ the\ ArrayLists,\ which\ is\ storing\ the\ knowledge\ of\ the\ surrundings\ in\ the\ turn.\n
+comment7.params=
+comment7.target=java.lang.String\ getCreator()
+comment7.text=\n\ This\ method\ is\ used\ to\ retrieve\ who\ the\ authors\ are.\n
+numComments=8
