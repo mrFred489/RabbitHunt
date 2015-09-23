@@ -67,7 +67,20 @@ public class Rabbit extends Animal {
     public Direction decideDirection(){
         lookAroundGrid();
         printGrid();
-        return Direction.S;
+        
+        Direction direction = randomDirection();
+        Direction latest = direction;
+        int i = 1;
+        while(!canMove(direction) && i < 8) {
+            direction = Direction.turn(direction, 1);
+            i++;
+        }
+
+        if(canMove(direction)) {
+            return latest = direction;
+        } else {
+            return latest;
+        }
     }
 
     /**
@@ -139,21 +152,19 @@ public class Rabbit extends Animal {
             
             if (whatsThere == Bush.class){
                 Position pos = getCoordinate(d);
-                System.out.println(pos.getRow());
-                System.out.println(pos.getColumn());
                 editGrid(pos.getRow(), pos.getColumn(), 2);
             }
-            /*
+
             else if (whatsThere == Carrot.class){
                 Position pos = getCoordinate(d);
                 editGrid(pos.getRow(), pos.getColumn(), 3);
             }
-
+            /*
             if (whatsThere == Fox.class) {
                 Position pos = getCoordinate(d);
                 editGrid(pos.getRow(), pos.getColumn(), 7);
-            }
-            */
+            }*/
+
 
         }
         
@@ -193,43 +204,35 @@ public class Rabbit extends Animal {
         int row = getPosition().getRow();
         int column = getPosition().getColumn();
         int dist = distance(direc);
-        
+
 
 
         switch(direc){
             case N:
-                System.out.println("in N");
                 row -= dist;
                 break;
             case NE:
-                System.out.println("in NE");
                 row -= dist;
                 column += dist;
                 break;
             case E:
-                System.out.println("in E");
                 column += dist;
                 break;
             case SE:
-                System.out.println("in SE");
                 row += dist;
                 column += dist;
                 break;
             case S:
-                System.out.println("in S");
                 row += dist;
                 break;
             case SW:
-                System.out.println("in SW");
                 row += dist;
                 column -= dist;
                 break;
             case W:
-                System.out.println("in W");
                 column -= dist;
                 break;
             case NW:
-                System.out.println("in NW");
                 row -= dist;
                 column -= dist;
                 break;
