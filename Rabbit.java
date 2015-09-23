@@ -65,8 +65,8 @@ public class Rabbit extends Animal {
      */
     public Direction decideDirection(){
         lookAroundGrid();
-
-        return Direction.STAY;
+        printGrid();
+        return Direction.S;
     }
 
     /**
@@ -214,7 +214,9 @@ public class Rabbit extends Animal {
     }
 
     public void printGrid(){
-        
+        for (ArrayList<Integer> row: grid){
+            System.out.println(row);
+        }
     }
     
     /**
