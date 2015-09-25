@@ -15,10 +15,6 @@ public class Rabbit extends Animal {
     private int close = 10;
     private ArrayList<Direction> foxDirections = new ArrayList<Direction>();
     private ArrayList<Integer> foxDistance = new ArrayList<Integer>();
-    private ArrayList<Direction> bushDirections = new ArrayList<Direction>();
-    private ArrayList<Integer> bushDistance = new ArrayList<Integer>();
-    private ArrayList<Direction> wallDirections = new ArrayList<Direction>();
-    private ArrayList<Integer> wallDistance = new ArrayList<Integer>();
 
     private ArrayList<ArrayList<Integer>> grid = new ArrayList<ArrayList<Integer>>();
 
@@ -66,7 +62,6 @@ public class Rabbit extends Animal {
      */
     public Direction decideDirection(){
         lookAroundGrid();
-        printGrid();
         
         Direction direction = randomDirection();
         Direction latest = direction;
@@ -75,12 +70,17 @@ public class Rabbit extends Animal {
             direction = Direction.turn(direction, 1);
             i++;
         }
-
-        if(canMove(direction)) {
-            return latest = direction;
-        } else {
-            return latest;
+        Position pos = getCoordinate(direction, 1);
+        // System.out.println(pos.getRow() + " " + pos.getColumn() + " " + grid.get(pos.getRow()).get(pos.getColumn()));
+        if (grid.get(pos.getRow()).get(pos.getColumn()) == 3){
+            editGrid(pos.getRow(), pos.getColumn(), 0);
         }
+
+        printGrid();
+        if(canMove(direction)) {
+            return direction;
+        }
+        return Direction.STAY;
     }
 
     /**
@@ -151,12 +151,12 @@ public class Rabbit extends Animal {
             int dist = distance(d);
             
             if (whatsThere == Bush.class){
-                Position pos = getCoordinate(d);
+                Position pos = getCoordinate(d, distance(d));
                 editGrid(pos.getRow(), pos.getColumn(), 2);
             }
 
             else if (whatsThere == Carrot.class){
-                Position pos = getCoordinate(d);
+                Position pos = getCoordinate(d, distance(d));
                 editGrid(pos.getRow(), pos.getColumn(), 3);
             }
             /*
@@ -184,10 +184,6 @@ public class Rabbit extends Animal {
     private void clearAreaKnowledge(){
         foxDistance.clear();
         foxDirections.clear();
-        bushDistance.clear();
-        bushDirections.clear();
-        wallDistance.clear();
-        wallDirections.clear();
     }
 
     private void populateGrid(){
@@ -200,12 +196,9 @@ public class Rabbit extends Animal {
         }
     }
 
-    private Position getCoordinate(Direction direc){
+    private Position getCoordinate(Direction direc, int dist){
         int row = getPosition().getRow();
         int column = getPosition().getColumn();
-        int dist = distance(direc);
-
-
 
         switch(direc){
             case N:
