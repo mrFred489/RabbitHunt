@@ -246,6 +246,6 @@ public class Rabbit extends Animal {
      * This method is used to retrieve who the authors are.
      */
     public String getCreator() {
-        return "Frederik Aarup Lauridsen, 201504700";
+        return "DA3 - 02 Nickolaj Jepsen og Frederik Aarup Lauridsen";
     }
 }
