@@ -12,11 +12,12 @@ public class Rabbit extends Animal {
      * first line of the construction. Appending code after
      * the first line is allowed.
      */
-    private int close = 10;
+
+    private int turnNumber = 0;
     private ArrayList<Direction> foxDirections = new ArrayList<Direction>();
     private ArrayList<Integer> foxDistance = new ArrayList<Integer>();
 
-    private ArrayList<ArrayList<Integer>> grid = new ArrayList<ArrayList<Integer>>();
+    private ArrayList<ArrayList<String>> grid = new ArrayList<ArrayList<String>>();
 
     private int circleSize = 1;
     private int circleCount = circleSize;
@@ -30,6 +31,7 @@ public class Rabbit extends Animal {
      */
 
     public Direction decideDirection2() { // opgave 1
+        turnNumber+=1;
         lookAround();
         Direction toReturn = Direction.STAY;
         if (foxDirections.size() != 0){
@@ -39,6 +41,7 @@ public class Rabbit extends Animal {
     }
 
     public Direction decideDirectio3() { // opgave 2
+        turnNumber+=1;
         lookAround();
         if (foxDirections.size() != 0){
             if (foxDistance.get(0) < 2){
@@ -57,10 +60,11 @@ public class Rabbit extends Animal {
 
     /**
      * Opgave 3
-     * Find en busk, og gå rundt om den, så ræven ikke kan se kaninen.
+     * Lav et grid med alt vi kan se, og vind ved at bruge de oplysninger.
      * @return
      */
     public Direction decideDirection(){
+        turnNumber+=1;
         lookAroundGrid();
         
         Direction direction = randomDirection();
@@ -72,8 +76,8 @@ public class Rabbit extends Animal {
         }
         Position pos = getCoordinate(direction, 1);
         // System.out.println(pos.getRow() + " " + pos.getColumn() + " " + grid.get(pos.getRow()).get(pos.getColumn()));
-        if (grid.get(pos.getRow()).get(pos.getColumn()) == 3){
-            editGrid(pos.getRow(), pos.getColumn(), 0);
+        if (grid.get(pos.getRow()).get(pos.getColumn()) == "3"){
+            editGrid(pos.getRow(), pos.getColumn(), "0");
         }
 
         printGrid();
@@ -152,25 +156,25 @@ public class Rabbit extends Animal {
             
             if (whatsThere == Bush.class){
                 Position pos = getCoordinate(d, distance(d));
-                editGrid(pos.getRow(), pos.getColumn(), 2);
+                editGrid(pos.getRow(), pos.getColumn(), "2");
             }
 
             else if (whatsThere == Carrot.class){
                 Position pos = getCoordinate(d, distance(d));
-                editGrid(pos.getRow(), pos.getColumn(), 3);
+                editGrid(pos.getRow(), pos.getColumn(), "3");
             }
-            /*
+
             if (whatsThere == Fox.class) {
-                Position pos = getCoordinate(d);
-                editGrid(pos.getRow(), pos.getColumn(), 7);
-            }*/
+                Position pos = getCoordinate(d, distance(d));
+                editGrid(pos.getRow(), pos.getColumn(), turnNumber + " 7");
+            }
 
 
         }
         
     }
 
-    private void editGrid(int row, int column, int number){
+    private void editGrid(int row, int column, String number){
         grid.get(row).set(column, number);
     }
 
@@ -188,9 +192,9 @@ public class Rabbit extends Animal {
 
     private void populateGrid(){
         for (int i = 0; i < 20; i++){
-            ArrayList<Integer> row = new ArrayList<Integer>();
+            ArrayList<String> row = new ArrayList<String>();
             for (int n = 0; n < 20; n++){
-                row.add(0);
+                row.add("0");
             }
             grid.add(row);
         }
@@ -235,8 +239,9 @@ public class Rabbit extends Animal {
         
     }
 
-    public void printGrid(){
-        for (ArrayList<Integer> row: grid){
+    private void printGrid(){
+        System.out.println("Tur nummer: " + turnNumber);
+        for (ArrayList<String> row: grid){
             System.out.println(row);
         }
         System.out.println();
