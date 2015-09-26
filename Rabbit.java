@@ -167,6 +167,7 @@ public class Rabbit extends Animal {
             if (whatsThere == Fox.class) {
                 Position pos = getCoordinate(d, distance(d));
                 editGrid(pos.getRow(), pos.getColumn(), turnNumber + " 7");
+                analyzeGrid();
             }
 
 
@@ -237,6 +238,10 @@ public class Rabbit extends Animal {
 
         return new Position(column, row);
         
+    }
+
+    private void analyzeGrid(){
+        System.out.println("Find u af hvilken retning ræven går, og opdater grid, hvis muligt");
     }
 
     private void printGrid(){
