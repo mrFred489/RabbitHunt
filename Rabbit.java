@@ -14,6 +14,7 @@ public class Rabbit extends Animal {
      */
 
     private int turnNumber = 0;
+    private Direction goDirection = randomDirection();
     private ArrayList<Direction> foxDirections = new ArrayList<Direction>();
     private ArrayList<Integer> foxDistance = new ArrayList<Integer>();
 
@@ -66,25 +67,24 @@ public class Rabbit extends Animal {
     public Direction decideDirection(){
         turnNumber+=1;
         lookAroundGrid();
-        
-        Direction direction = randomDirection();
-        Direction latest = direction;
-        int i = 1;
-        while(!canMove(direction) && i < 8) {
-            direction = Direction.turn(direction, 1);
-            i++;
+
+        if (!canMove(goDirection)){
+            int i = 1;
+            System.out.println("getting new direction");
+            while(!canMove(goDirection) && i < 8) {
+                goDirection = Direction.turn(goDirection, 1);
+                i++;
+            }
         }
-        Position pos = getCoordinate(direction, 1);
+
+        Position pos = getCoordinate(goDirection, 1);
         // System.out.println(pos.getRow() + " " + pos.getColumn() + " " + grid.get(pos.getRow()).get(pos.getColumn()));
         if (grid.get(pos.getRow()).get(pos.getColumn()) == "3"){
             editGrid(pos.getRow(), pos.getColumn(), "0");
         }
 
         printGrid();
-        if(canMove(direction)) {
-            return direction;
-        }
-        return Direction.STAY;
+        return goDirection;
     }
 
     /**
