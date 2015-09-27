@@ -22,7 +22,9 @@ public class Rabbit extends Animal {
     private int circleSize = 1;
     private int circleCount = circleSize;
     
-
+    private Direction foxDirection = null;
+    private int beserkCounter = 0;
+    
     public Rabbit(Model model, Position position) {
         super(model, position);
     }
@@ -119,7 +121,73 @@ public class Rabbit extends Animal {
         return Direction.STAY;
     }
 
-    
+    /**
+     * Opgave 4
+     * Søg efter carrots, derefter jag ræven.
+     * @return
+     */
+    public Direction decideDirection5(){
+        Direction direction = randomDirection();
+        Direction carrotDirection = null;
+
+        // Check efter ræve
+        for(Direction d : Direction.allDirections()) {
+            Class<?> observed = look(d);
+            if(observed == Fox.class) {
+                foxDirection = d;
+            }
+        }
+
+        // Check efter gulerødder
+        for(Direction d : Direction.allDirections()) {
+            Class<?> observed = look(d);
+            if(observed == Carrot.class) {
+                if (carrotDirection != null ){
+                    if (distance(carrotDirection) > distance(d)){
+                        carrotDirection = d;
+                    }
+                }else{
+                    carrotDirection = d;
+                }
+            }
+        }
+
+        if (!isBeserk()){
+            // Bevæg mod gulerod hvis fundet
+            if (carrotDirection != null){
+                direction = carrotDirection;
+                //Hvis gulerod bliver spist i næste runde
+                if (distance(carrotDirection) == 1){
+                    beserkCounter += 30;
+                }
+            } else {
+                //Flygt fra ræv
+                lookAround();
+                if (foxDirections.size() != 0){
+                    direction = tryEscape(foxDirections.get(0));
+                }
+            }
+        }else{
+            if (foxDirection != null){
+                // Jag ræv kun hvis man kan nå det før beserk udløber
+                if (distance(foxDirection) < (beserkCounter/2)+1){
+                    if (distance(foxDirection) == 2){
+                        direction = Direction.STAY;              
+                    } else {
+                        direction = foxDirection;
+                    }
+                }
+            }
+        }
+
+        if (beserkCounter > 0){
+            beserkCounter--;
+            System.out.println(beserkCounter);
+        }
+
+        return direction;
+    }
+
     /**
      * Brugt i opgave 1 til at bestemme bevægelses retning
      * @param direct
