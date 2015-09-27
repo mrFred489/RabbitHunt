@@ -19,13 +19,12 @@ public class Rabbit extends Animal {
     private ArrayList<Direction> foxDirections = new ArrayList<Direction>();
     private ArrayList<Integer> foxDistance = new ArrayList<Integer>();
 
-    private ArrayList<ArrayList<String>> grid = new ArrayList<ArrayList<String>>();
-
     private int circleSize = 1;
     private int circleCount = circleSize;
+    
+
     public Rabbit(Model model, Position position) {
         super(model, position);
-        populateGrid();
     }
 
     /**
@@ -120,34 +119,7 @@ public class Rabbit extends Animal {
         return Direction.STAY;
     }
 
-    /**
-     * Opgave 4
-     * Lav et grid med alt vi kan se, og vind ved at bruge de oplysninger.
-     * @return
-     */
-    public Direction decideDirection5(){
-        turnNumber+=1;
-        lookAroundGrid();
-
-        if (!canMove(goDirection)){
-            int i = 1;
-            System.out.println("getting new direction");
-            while(!canMove(goDirection) && i < 8) {
-                goDirection = Direction.turn(goDirection, 1);
-                i++;
-            }
-        }
-
-        Position pos = getCoordinate(goDirection, 1);
-        // System.out.println(pos.getRow() + " " + pos.getColumn() + " " + grid.get(pos.getRow()).get(pos.getColumn()));
-        if (grid.get(pos.getRow()).get(pos.getColumn()) == "3"){
-            editGrid(pos.getRow(), pos.getColumn(), "0");
-        }
-
-        printGrid();
-        return goDirection;
-    }
-
+    
     /**
      * Brugt i opgave 1 til at bestemme bevægelses retning
      * @param direct
@@ -190,120 +162,11 @@ public class Rabbit extends Animal {
     }
 
     /**
-     * 1 = kanin
-     * 2 = busk
-     * 3 = gulerod
-     * 7 = ræv ukendt
-     * 8 = ræv nord
-     * 9 = ræv nord øst
-     * 10 = ræv øst
-     * 11 = ræv syd øst
-     * 12 = ræv syd
-     * 13 = ræv syd vest
-     * 14 = ræv vest
-     * 15 = ræv nord vest
-     */
-    private void lookAroundGrid(){
-        int myRow = getPosition().getRow();
-        int myColumn = getPosition().getColumn();
-        
-        Iterable<Direction> directions = Direction.allDirections();
-        for (Direction d : directions) {
-            Class<?> whatsThere = look(d);
-            int dist = distance(d);
-            
-            if (whatsThere == Bush.class){
-                Position pos = getCoordinate(d, distance(d));
-                editGrid(pos.getRow(), pos.getColumn(), "2");
-            }
-
-            else if (whatsThere == Carrot.class){
-                Position pos = getCoordinate(d, distance(d));
-                editGrid(pos.getRow(), pos.getColumn(), "3");
-            }
-
-            if (whatsThere == Fox.class) {
-                Position pos = getCoordinate(d, distance(d));
-                editGrid(pos.getRow(), pos.getColumn(), turnNumber + " 7");
-                analyzeGrid();
-            }
-
-
-        }
-        
-    }
-
-    private void editGrid(int row, int column, String number){
-        grid.get(row).set(column, number);
-    }
-
-    /**
      * clear the ArrayLists, which is storing the knowledge of the surrundings in the turn.
      */
     private void clearAreaKnowledge(){
         foxDistance.clear();
         foxDirections.clear();
-    }
-
-    private void populateGrid(){
-        for (int i = 0; i < 20; i++){
-            ArrayList<String> row = new ArrayList<String>();
-            for (int n = 0; n < 20; n++){
-                row.add("0");
-            }
-            grid.add(row);
-        }
-    }
-
-    private Position getCoordinate(Direction direc, int dist){
-        int row = getPosition().getRow();
-        int column = getPosition().getColumn();
-
-        switch(direc){
-            case N:
-                row -= dist;
-                break;
-            case NE:
-                row -= dist;
-                column += dist;
-                break;
-            case E:
-                column += dist;
-                break;
-            case SE:
-                row += dist;
-                column += dist;
-                break;
-            case S:
-                row += dist;
-                break;
-            case SW:
-                row += dist;
-                column -= dist;
-                break;
-            case W:
-                column -= dist;
-                break;
-            case NW:
-                row -= dist;
-                column -= dist;
-                break;
-        }
-
-        return new Position(column, row);
-        
-    }
-
-    private void analyzeGrid(){
-        System.out.println("Find u af hvilken retning ræven går, og opdater grid, hvis muligt");
-    }
-
-    private void printGrid(){
-        System.out.println("Tur nummer: " + turnNumber);
-        for (ArrayList<String> row: grid){
-            System.out.println(row);
-        }
-        System.out.println();
     }
     
     /**
