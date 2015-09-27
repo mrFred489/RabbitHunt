@@ -27,11 +27,12 @@ public class Rabbit extends Animal {
         super(model, position);
         populateGrid();
     }
-    
-    /**
-     * Decides in which direction the rabbit wants to move.
-     */
 
+    /**
+     * Opgave 1
+     * Flytter sig ud af synsfeltet for ræven, ellers står stille.
+     * @return
+     */
     public Direction decideDirection2() { // opgave 1
         lookAround();
         Direction toReturn = Direction.STAY;
@@ -41,7 +42,11 @@ public class Rabbit extends Animal {
         return toReturn;
     }
 
-    public Direction decideDirectio3() { // opgave 2
+    /**
+     * Opgave 2
+     * @return
+     */
+    public Direction decideDirectio3() {
         lookAround();
         if (foxDirections.size() != 0){
             if (foxDistance.get(0) < 2){
@@ -59,6 +64,12 @@ public class Rabbit extends Animal {
         return Direction.STAY;
     }
 
+    /**
+     * Opgave 3
+     * Bruger samme metode som opgave 1, men gemmer de mulige retninger for hver ræv, og derefter sammenligner listen
+     * for mulige bevægelser for alle rævene, og vælger en der er mulig for alle rævene.
+     * @return
+     */
     public Direction decideDirection(){
         lookAround();
         System.out.println("fox directions: " + foxDirections);
@@ -104,7 +115,7 @@ public class Rabbit extends Animal {
 
             prevDirection = foxesDirections.get(0).get(0);
             return foxesDirections.get(0).get(0);
-            
+
         }
         return Direction.STAY;
     }
@@ -138,7 +149,7 @@ public class Rabbit extends Animal {
     }
 
     /**
-     * Used in task 1,
+     * Brugt i opgave 1 til at bestemme bevægelses retning
      * @param direct
      * @return
      */
@@ -161,7 +172,7 @@ public class Rabbit extends Animal {
     }
 
     /**
-     * Looks around the area and add what it sees to some ArrayLists
+     * Kigger i alle retninger, og tilføjer rævene til nogle lister
      */
     private void lookAround(){
         clearAreaKnowledge();
@@ -225,10 +236,6 @@ public class Rabbit extends Animal {
     private void editGrid(int row, int column, String number){
         grid.get(row).set(column, number);
     }
-
-    /*private ArrayList<ArrayList<Integer>> nextTurn(int turns){
-        
-    }*/
 
     /**
      * clear the ArrayLists, which is storing the knowledge of the surrundings in the turn.
