@@ -14,6 +14,7 @@ public class Rabbit extends Animal {
      */
 
     private int turnNumber = 0;
+    private Direction prevDirection;
     private Direction goDirection = randomDirection();
     private ArrayList<Direction> foxDirections = new ArrayList<Direction>();
     private ArrayList<Integer> foxDistance = new ArrayList<Integer>();
@@ -32,7 +33,6 @@ public class Rabbit extends Animal {
      */
 
     public Direction decideDirection2() { // opgave 1
-        turnNumber+=1;
         lookAround();
         Direction toReturn = Direction.STAY;
         if (foxDirections.size() != 0){
@@ -42,7 +42,6 @@ public class Rabbit extends Animal {
     }
 
     public Direction decideDirectio3() { // opgave 2
-        turnNumber+=1;
         lookAround();
         if (foxDirections.size() != 0){
             if (foxDistance.get(0) < 2){
@@ -56,15 +55,66 @@ public class Rabbit extends Animal {
                 }
             }
         }
+
+        return Direction.STAY;
+    }
+
+    public Direction decideDirection(){
+        lookAround();
+        System.out.println("fox directions: " + foxDirections);
+        ArrayList<ArrayList<Direction>> foxesDirections = new ArrayList<ArrayList<Direction>>();
+        for (Direction foxD : foxDirections){
+            ArrayList<Direction> validDirections = new ArrayList<Direction>();
+            for (int i = 3; i > 0; i--){
+                if (canMove(Direction.turn(foxD, i))){
+                    validDirections.add(Direction.turn(foxD, i));
+                }
+                if (canMove(Direction.turn(foxD, -i))){
+                    validDirections.add(Direction.turn(foxD, -i));
+                }
+            }
+            foxesDirections.add(validDirections);
+        }
+        System.out.println("foxes Directions: " + foxesDirections);
+
+        ArrayList<Direction> goDirections = new ArrayList<Direction>();
+        for (int i = 0; i < foxesDirections.size() / 2 + (foxesDirections.size() % 2); i++){
+            for (int n = 0; n < foxesDirections.get(i).size(); n++){
+                boolean available = true;
+                for (int k = 0; k < foxesDirections.size(); k++) {
+                    if (!foxesDirections.get(k).contains(foxesDirections.get(i).get(n))) {
+                        available = false;
+                    }
+                }
+                if (available){
+                    goDirections.add(foxesDirections.get(i).get(n));
+                }
+            }
+        }
+
+        System.out.println("go directions: " + goDirections);
+
+        if (foxDirections.size() > 0){
+            for (Direction dire : goDirections){
+                if (dire != prevDirection){
+                    prevDirection = dire;
+                    return dire;
+                }
+            }
+
+            prevDirection = foxesDirections.get(0).get(0);
+            return foxesDirections.get(0).get(0);
+            
+        }
         return Direction.STAY;
     }
 
     /**
-     * Opgave 3
+     * Opgave 4
      * Lav et grid med alt vi kan se, og vind ved at bruge de oplysninger.
      * @return
      */
-    public Direction decideDirection(){
+    public Direction decideDirection5(){
         turnNumber+=1;
         lookAroundGrid();
 
@@ -124,9 +174,6 @@ public class Rabbit extends Animal {
 
                 foxDistance.add(dist);
                 foxDirections.add(d);
-            }
-            else if (whatsThere == Bush.class){
-
             }
         }
     }
