@@ -75,3 +75,5 @@ bluej.pkh
 .idea/workspace.xml
 
 .idea/workspace.xml
+### OSX ###
+.DS_Store

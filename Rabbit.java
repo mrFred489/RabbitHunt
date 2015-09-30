@@ -21,10 +21,10 @@ public class Rabbit extends Animal {
 
     private int circleSize = 1;
     private int circleCount = circleSize;
-    
+
     private Direction foxDirection = null;
     private int beserkCounter = 0;
-    
+
     public Rabbit(Model model, Position position) {
         super(model, position);
     }
@@ -71,7 +71,7 @@ public class Rabbit extends Animal {
      * for mulige bevægelser for alle rævene, og vælger en der er mulig for alle rævene.
      * @return
      */
-    public Direction decideDirection(){
+    public Direction decideDirection4(){
         lookAround();
         System.out.println("fox directions: " + foxDirections);
         ArrayList<ArrayList<Direction>> foxesDirections = new ArrayList<ArrayList<Direction>>();
@@ -126,7 +126,7 @@ public class Rabbit extends Animal {
      * Søg efter carrots, derefter jag ræven.
      * @return
      */
-    public Direction decideDirection5(){
+    public Direction decideDirection(){
         Direction direction = randomDirection();
         Direction carrotDirection = null;
 
@@ -236,7 +236,7 @@ public class Rabbit extends Animal {
         foxDistance.clear();
         foxDirections.clear();
     }
-    
+
     /**
      * This method is used to retrieve who the authors are.
      */
